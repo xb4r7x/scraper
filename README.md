@@ -1,5 +1,5 @@
 # scraper
-I am looking to purchase a heater for campint. Unfortunately they're very hard to find right now, and they sell out fast. As a quick coding exercise I figured I'd write a little program to scrape the in-stock status and purchase the heater if/when it comes back in stock.
+I am looking to purchase a heater for camping. Unfortunately they're very hard to find right now, and they sell out fast. As a quick coding exercise I figured I'd write a little program to scrape the in-stock status and purchase the heater if/when it comes back in stock.
 
 # Setup Instructions (mac):
 
