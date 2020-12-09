@@ -20,7 +20,7 @@ def check_available(base_url):
         return 1
    
 def notify_slack(message):
-    webhook_url = 'https://hooks.slack.com/services/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'
+    webhook_url = config.SLACKURL
     payload = {'text': message}
     
     response = requests.post(
@@ -92,17 +92,18 @@ def purchase_heater(base_url, checkout_url):
     time.sleep(28800)
 
 loopcount = 0
+notify_slack("STARTING HEATER SNIPER")
 while True:
     loopcount += 1
     stock_status = check_available(base_url)
-
+    print("Stock Status is {} check number {}".format(stock_status, loopcount)) 
     if stock_status == 0:
         if loopcount % 720 == 0:
-            print(loopcount) 
             notify_slack("Item is not yet in stock. {}".format(base_url))
     if stock_status == 1:
-        notify_slack("HOLY CRAP IT'S AVAILABLE! PURCHASING AUTOMATICALLY - GO VERIFY PURCHASE {}".format(base_url))    
+        notify_slack("HOLY CRAP IT'S AVAILABLE! PURCHASING AUTOMATICALLY - GO VERIFY PURCHASE {}".format(base_url))
+        print("HEATER IN STOCK. PURCHASING")    
         purchase_heater(base_url, checkout_url)
         break
     
-    time.sleep(5)
+    time.sleep(10)
