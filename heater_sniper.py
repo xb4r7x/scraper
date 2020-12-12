@@ -13,11 +13,15 @@ checkout_url = 'https://www.vancafe.com/one-page-checkout.asp'
 def check_available(base_url):
     page = requests.get(base_url)
     soup = BeautifulSoup(page.content, 'html.parser')
-    div = soup.find(itemprop="offers").get_text()
-    if "Out" in div:
+    try:
+        div = soup.find(itemprop="offers").get_text()
+        if "Out" in div:
+            return 0
+        else:
+            return 1
+    except:
+        print("An error occured checking the page. Going to try again. If this keeps happening you may have to troubleshoot.")
         return 0
-    else:
-        return 1
    
 def notify_slack(message):
     webhook_url = config.SLACKURL
@@ -89,7 +93,7 @@ def purchase_heater(base_url, checkout_url):
     driver.find_element_by_name('Orders.Custom_Field_Terms').click()
     driver.find_element_by_id('imgSubmitOrder').click()
 
-    time.sleep(28800)
+    time.sleep(28800) 
 
 loopcount = 0
 notify_slack("STARTING HEATER SNIPER")
