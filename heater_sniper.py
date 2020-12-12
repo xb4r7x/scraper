@@ -62,7 +62,7 @@ def purchase_heater(base_url, checkout_url):
     driver.find_element_by_name('ShipResidential').click()
     time.sleep(5)
     select = Select(driver.find_element_by_name('ShippingSpeedChoice'))
-    select.select_by_value('1098')
+    select.select_by_value('701')
 
     time.sleep(5)
 
